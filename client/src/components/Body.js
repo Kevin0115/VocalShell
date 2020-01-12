@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Tabs, Tab } from 'react-bootstrap';
+import { Card, Tabs, Tab, Table } from 'react-bootstrap';
 import '../css/Body.css';
 import '../App.css';
 
 import VocalShell from './VocalShell';
+import Help from './Help';
 
 class Body extends Component {
   render() {
@@ -19,6 +20,11 @@ class Body extends Component {
               </Tab>
               <Tab eventKey="logs" title="Logs">
               Log content
+              </Tab>
+              <Tab eventKey="help" title="Help">
+                <div className="helpshell-wrapper">
+                  <Help />
+                </div>
               </Tab>
             </Tabs>
           </Card.Body>
