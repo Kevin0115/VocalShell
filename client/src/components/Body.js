@@ -9,7 +9,7 @@ class Body extends Component {
   render() {
     return(
       <div className="body-content">
-        <Card style={{ width: '80vw', height: "80vh" }}>
+        <Card style={{ width: '80vw' }}>
           <Card.Body>
             <Tabs defaultActiveKey="shell">
               <Tab eventKey="shell" title="Shell">
