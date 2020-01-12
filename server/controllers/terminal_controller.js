@@ -135,6 +135,7 @@ exports.execute_command = async (req, res) => {
       if (command.length > 2) {
         file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
       }
+      console.log("cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name);
       cmd.get(
         "cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name,
         function (err, data, stderr) {
