@@ -7,9 +7,9 @@ import VocalShell from './components/VocalShell';
 function App() {
   return (
     <div className="App">
-      <VocalShell />
-      {/* <Header /> */}
-      {/* <Body /> */}
+      {/* <VocalShell /> */}
+      <Header />
+      <Body />
     </div>
   );
 }
