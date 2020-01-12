@@ -10,7 +10,7 @@ class Body extends Component {
       <div className="body-content">
         <Card style={{ width: '80vw' }}>
           <Card.Body>
-            <Tabs defaultActiveKey="shell" style={{ fontSize: 19, fontFamily: 'monospace' }}>
+            <Tabs defaultActiveKey="shell">
               <Tab eventKey="shell" title="Shell">
                 <div className="vocalshell-wrapper">
                   <VocalShell />
