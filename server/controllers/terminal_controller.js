@@ -42,6 +42,7 @@ exports.execute_command = async (req, res) => {
 
     var command = transcription.trim().split(" ");
     var dictionary = {
+      clear : ["clear",],
       pwd : ["print", "working", "directory"],
       cwd : ["current", "working", "directory"],
       ls : ["list", "files"],
@@ -118,6 +119,12 @@ exports.execute_command = async (req, res) => {
           });
         }
       );
+    } else if (compareInputToCommand(command, dictionary.clear, 1)) {
+      res.send({
+        success: true,
+        input: transcription,
+        output: "",
+      });
     } else {
       res.send({
         success: false,
