@@ -1,5 +1,65 @@
 .vocalshell {
   display: flex;
   flex-direction: column;
+  width: 600px;
 }
 
+.recording {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recording > * {
+  margin: 8px 0;
+}
+
+.shell {
+  margin-top: 16px;
+}
+
+.topbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 24px;
+  width: 100%;
+  background-color: grey;
+  border-radius: 8px 8px 0 0;
+}
+
+.shell-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  min-height: 400px;
+  width: 100%;
+  color: white;
+  background-color: black;
+  padding: 8px;
+  border-radius: 0 0 8px 8px;
+}
+
+.shell-body > * {
+  margin: 4px 0;
+}
+
+.red-dot, .yellow-dot, .green-dot {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.red-dot {
+  background-color: red;
+}
+
+.green-dot {
+  background-color: green;
+}
+
+.yellow-dot {
+  background-color: yellow;
+}
