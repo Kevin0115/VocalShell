@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       {/* <VocalShell /> */}
       <Header />
-      <Body />
+      {/* <Body /> */}
     </div>
   );
 }
