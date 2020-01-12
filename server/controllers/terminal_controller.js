@@ -9,6 +9,7 @@ cmd.get(
     cwd = data;
   }
 );
+var lorem = "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"";
 
 exports.execute_command = async (req, res) => {
   try {
@@ -40,7 +41,7 @@ exports.execute_command = async (req, res) => {
       .join('\n');
     console.log(`Transcription: ${transcription}`);
 
-    var command = transcription.trim().split(" ");
+    var command = transcription.trim().toLowerCase().split(" ");
     var dictionary = {
       clear : ["clear",],
       pwd : ["print", "working", "directory"],
@@ -49,6 +50,11 @@ exports.execute_command = async (req, res) => {
       mkdir :  ["make", "directory"],
       rmdir : ["remove", "directory"],
       cd : ["change", "directory"],
+      touch : ["touch"],
+      create : ["create"],
+      cat : ["cat"],
+      display : ["display"],
+      remove : ["remove"],
     };
 
     if (compareInputToCommand(command, dictionary.pwd, 3) || compareInputToCommand(command, dictionary.cwd, 3)) {
@@ -125,11 +131,62 @@ exports.execute_command = async (req, res) => {
         input: transcription,
         output: "",
       });
+    } else if (compareInputToCommand(command, dictionary.touch, 1) || compareInputToCommand(command, dictionary.create, 1)) {
+      console.log("touch");
+      var file_name = "";
+      if (command.length > 1) {
+        file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
+      }
+      console.log("cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name);
+      cmd.get(
+        "cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + " >> " + file_name,
+        function (err, data, stderr) {
+          res.send({
+            success: true,
+            input: transcription,
+            output: data
+          });
+        }
+      );
+    } else if (compareInputToCommand(command, dictionary.cat, 1) || compareInputToCommand(command, dictionary.display, 1)) {
+      console.log("cat");
+      var file_name = "";
+      if (command.length > 1) {
+        file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
+      }
+      console.log("cd " + cwd + "\ncat" + file_name);
+      cmd.get(
+        "cd " + cwd + "\ncat" + file_name,
+        function (err, data, stderr) {
+          res.send({
+            success: true,
+            input: transcription,
+            output: data
+          });
+        }
+      );
+    } else if (compareInputToCommand(command, dictionary.remove, 1)) {
+      console.log("remove");
+      var file_name = "";
+      if (command.length > 1) {
+        file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
+      }
+      console.log("cd " + cwd + "\nrm" + file_name);
+      cmd.get(
+        "cd " + cwd + "\nrm" + file_name,
+        function (err, data, stderr) {
+          res.send({
+            success: true,
+            input: transcription,
+            output: data
+          });
+        }
+      );
     } else {
       res.send({
         success: false,
         input: transcription,
-        output: "Could not recognize command",
+        output: command.length > 0 ? "command not found: " + command[0] : "",
       });
     }
   } catch (e) {
