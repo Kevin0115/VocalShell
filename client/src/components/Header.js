@@ -5,7 +5,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header-content">
-        <h1>Vocal Shell</h1>
+        <h1>VocalShell</h1>
       </div>
     );
   }

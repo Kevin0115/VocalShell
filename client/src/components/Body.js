@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Tabs, Tab, Table } from 'react-bootstrap';
 import '../css/Body.css';
-import '../App.css';
 
 import VocalShell from './VocalShell';
 import Help from './Help';

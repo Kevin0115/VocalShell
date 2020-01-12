@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import Recorder from 'react-mp3-recorder';
 import ReactAudioPlayer from 'react-audio-player';
 import '../css/VocalShell.css';
 
 import blobToBuffer from 'blob-to-buffer';
 
-// const speech = require('@google-cloud/speech');
-
-// const client = new speech.SpeechClient();
+const API_URL = 'http://05aca56f.ngrok.io';
 
 class VocalShell extends Component {
   constructor(props) {
@@ -16,14 +13,8 @@ class VocalShell extends Component {
     this.state = {
       blobURL: '',
       blinkCursor: false,
-      commandList: [
-        {
-          cmd: 'cd server',
-        },
-        {
-          cmd: 'pwd'
-        }
-      ],
+      commandList: [],
+      loading: false,
     };
   }
 
@@ -47,30 +38,41 @@ class VocalShell extends Component {
         blobURL: window.URL.createObjectURL(blob)
       })
 
-      // const audioBytes = blob.toString('base64');
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result.replace(/^data:.+;base64,/, '');
+        console.log(base64data);
 
-      // const audio = {
-      //   content: audioBytes,
-      // }
-
-      // const config = {
-      //   encoding: 'LINEAR16',
-      //   sampleRateHertz: 16000,
-      //   languageCode: 'en-US',
-      // };
-      // const request = {
-      //   audio: audio,
-      //   config: config,
-      // };
-
-      // // Detects speech in the audio file
-      // const [response] = await client.recognize(request);
-      // const transcription = response.results
-      //   .map(result => result.alternatives[0].transcript)
-      //   .join('\n');
-      // console.log(`Transcription: ${transcription}`);
-
-      console.log(this.state.blobURL)
+        fetch(API_URL + '/terminal', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            audio: base64data,
+          })
+        })
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          if (json.success) {
+            this.state.commandList.push({
+              cmd: json.input
+            })
+            this.state.commandList.push({
+              cmd: json.output
+            })
+          } else {
+            this.state.commandList.push({
+              cmd: json.output
+            })
+          }
+        })
+        .catch((err) => {
+          console.log('Error Transcribing Audio');
+        })
+      }
     })
   }
 
@@ -83,7 +85,7 @@ class VocalShell extends Component {
 
   renderCommands() {
     return this.state.commandList.map((item, index) => {
-      return <p>> {item.cmd}</p>;
+      return <p key={index}>> {item.cmd}</p>;
     })
   }
 
