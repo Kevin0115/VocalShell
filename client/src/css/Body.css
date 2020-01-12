@@ -1,0 +1,6 @@
+.vocalshell-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 16px 0;
+}
