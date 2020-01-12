@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/VocalShell/static/css/main.b61e1f40.chunk.css",
+    "main.js": "/VocalShell/static/js/main.15a98e60.chunk.js",
+    "main.js.map": "/VocalShell/static/js/main.15a98e60.chunk.js.map",
+    "runtime-main.js": "/VocalShell/static/js/runtime-main.fb8ae425.js",
+    "runtime-main.js.map": "/VocalShell/static/js/runtime-main.fb8ae425.js.map",
+    "static/js/2.eba2f3ce.chunk.js": "/VocalShell/static/js/2.eba2f3ce.chunk.js",
+    "static/js/2.eba2f3ce.chunk.js.map": "/VocalShell/static/js/2.eba2f3ce.chunk.js.map",
+    "index.html": "/VocalShell/index.html",
+    "precache-manifest.7585e49db0c1216f621c4d24bae81ce6.js": "/VocalShell/precache-manifest.7585e49db0c1216f621c4d24bae81ce6.js",
+    "service-worker.js": "/VocalShell/service-worker.js",
+    "static/css/main.b61e1f40.chunk.css.map": "/VocalShell/static/css/main.b61e1f40.chunk.css.map",
+    "static/js/2.eba2f3ce.chunk.js.LICENSE": "/VocalShell/static/js/2.eba2f3ce.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb8ae425.js",
+    "static/js/2.eba2f3ce.chunk.js",
+    "static/css/main.b61e1f40.chunk.css",
+    "static/js/main.15a98e60.chunk.js"
+  ]
+}
