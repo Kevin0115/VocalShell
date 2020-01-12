@@ -53,6 +53,8 @@ exports.execute_command = async (req, res) => {
       touch : ["touch"],
       create : ["create"],
       cat : ["cat"],
+      display : ["display"],
+      remove : ["remove"],
     };
 
     if (compareInputToCommand(command, dictionary.pwd, 3) || compareInputToCommand(command, dictionary.cwd, 3)) {
@@ -146,7 +148,7 @@ exports.execute_command = async (req, res) => {
           });
         }
       );
-    } else if (compareInputToCommand(command, dictionary.cat, 1)) {
+    } else if (compareInputToCommand(command, dictionary.cat, 1) || compareInputToCommand(command, dictionary.display, 1)) {
       console.log("cat");
       var file_name = "";
       if (command.length > 1) {
@@ -155,6 +157,23 @@ exports.execute_command = async (req, res) => {
       console.log("cd " + cwd + "\ncat" + file_name);
       cmd.get(
         "cd " + cwd + "\ncat" + file_name,
+        function (err, data, stderr) {
+          res.send({
+            success: true,
+            input: transcription,
+            output: data
+          });
+        }
+      );
+    } else if (compareInputToCommand(command, dictionary.remove, 1)) {
+      console.log("remove");
+      var file_name = "";
+      if (command.length > 1) {
+        file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
+      }
+      console.log("cd " + cwd + "\nrm" + file_name);
+      cmd.get(
+        "cd " + cwd + "\nrm" + file_name,
         function (err, data, stderr) {
           res.send({
             success: true,
