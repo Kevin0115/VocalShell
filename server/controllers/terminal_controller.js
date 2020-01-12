@@ -132,12 +132,12 @@ exports.execute_command = async (req, res) => {
     } else if (compareInputToCommand(command, dictionary.touch, 1) || compareInputToCommand(command, dictionary.create, 1)) {
       console.log("touch");
       var file_name = "";
-      if (command.length > 2) {
+      if (command.length > 1) {
         file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
       }
       console.log("cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name);
       cmd.get(
-        "cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name,
+        "cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + " >> " + file_name,
         function (err, data, stderr) {
           res.send({
             success: true,
@@ -149,7 +149,7 @@ exports.execute_command = async (req, res) => {
     } else if (compareInputToCommand(command, dictionary.cat, 1)) {
       console.log("cat");
       var file_name = "";
-      if (command.length > 2) {
+      if (command.length > 1) {
         file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
       }
       console.log("cd " + cwd + "\ncat" + file_name);
