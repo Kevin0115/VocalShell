@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Recorder from 'react-mp3-recorder';
+import { Spinner } from 'react-bootstrap'
 import ReactAudioPlayer from 'react-audio-player';
 import '../css/VocalShell.css';
 
@@ -16,6 +17,7 @@ class VocalShell extends Component {
       commandList: [],
       loading: false,
     };
+    this.renderRecorder = this.renderRecorder.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +29,7 @@ class VocalShell extends Component {
 
   onRecordingComplete = async (blob) => {
     blobToBuffer(blob, async (err, buffer) => {
+      this.setState({loading: true});
       if (err) {
         console.error(err)
         return
@@ -68,9 +71,11 @@ class VocalShell extends Component {
               cmd: json.output
             })
           }
+          this.setState({loading: false});
         })
         .catch((err) => {
           console.log('Error Transcribing Audio');
+          this.setState({loading: false});
         })
       }
     })
@@ -89,6 +94,24 @@ class VocalShell extends Component {
     })
   }
 
+  renderRecorder() {
+    if (this.state.loading) {
+      return (
+        <Spinner className="loading" animation="grow" />
+      )
+    } else {
+      return (
+        <Recorder
+          onRecordingComplete={this.onRecordingComplete}
+          onRecordingError={this.onRecordingError}
+          style={{
+            margin: '0 auto'
+          }}
+        />
+      );
+    }
+  }
+
   render() {
     return(
       <div className="vocalshell">
@@ -97,14 +120,8 @@ class VocalShell extends Component {
             <div className="instructions">
               Press and hold to record your command.
             </div>
-            <Recorder
-              onRecordingComplete={this.onRecordingComplete}
-              onRecordingError={this.onRecordingError}
-              style={{
-                margin: '0 auto'
-              }}
-            />
-            {this.state.blobURL && (
+            {this.renderRecorder()}
+            {/* {this.state.blobURL && (
               <ReactAudioPlayer
                 src={this.state.blobURL}
                 controls
@@ -112,7 +129,7 @@ class VocalShell extends Component {
                   minWidth: '500px'
                 }}
               />
-            )}
+            )} */}
           </div>
           <div className="shell">
             <div className="topbar">

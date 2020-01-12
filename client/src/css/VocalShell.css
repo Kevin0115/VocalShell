@@ -33,16 +33,20 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  min-height: 400px;
+  height: 400px;
   width: 100%;
   color: white;
   background-color: #363636;
   padding: 8px;
   border-radius: 0 0 8px 8px;
+  overflow-y: auto;
+  font-size: 14px;
+  font-family: monospace;
 }
 
 .shell-body p {
-  font-family: monaco;
+  font-size: 14px;
+  font-family: monospace;
 }
 
 .shell-body > * {
@@ -70,4 +74,10 @@
 .yellow-dot {
   background: rgb(54,54,54);
   background: linear-gradient(256deg, rgba(54,54,54,1) 0%, rgba(247,255,64,1) 0%, rgba(254,255,149,1) 100%);
+}
+
+.loading {
+  height: 64px;
+  width: 64px;
+  margin: 0;
 }
