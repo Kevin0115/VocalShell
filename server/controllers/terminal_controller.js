@@ -51,6 +51,7 @@ exports.execute_command = async (req, res) => {
       rmdir : ["remove", "directory"],
       cd : ["change", "directory"],
       touch : ["touch"],
+      create : ["create"],
       cat : ["cat"],
     };
 
@@ -128,7 +129,7 @@ exports.execute_command = async (req, res) => {
         input: transcription,
         output: "",
       });
-    } else if (compareInputToCommand(command, dictionary.touch, 1)) {
+    } else if (compareInputToCommand(command, dictionary.touch, 1) || compareInputToCommand(command, dictionary.create, 1)) {
       console.log("touch");
       var file_name = "";
       if (command.length > 2) {
