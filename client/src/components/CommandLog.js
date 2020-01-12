@@ -15,7 +15,7 @@ class CommandLog extends Component {
   }
 
   fetchLogs() {
-    fetch('http://localhost:8080' + '/command_log', {
+    fetch('http://34.94.33.138:8080' + '/command_log', {
       method: 'GET'
     })
     .then(res => res.json())

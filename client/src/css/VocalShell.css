@@ -1,3 +1,8 @@
+.vocalshell-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .vocalshell {
   display: flex;
   flex-direction: column;

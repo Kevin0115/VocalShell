@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kevin0115.github.io/VocalShell",
   "dependencies": {
     "@google-cloud/speech": "^3.5.4",
     "@testing-library/jest-dom": "^4.2.4",
@@ -9,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "blob-to-buffer": "^1.2.8",
     "bootstrap": "^4.4.1",
+    "gh-pages": "^2.2.0",
     "react": "^16.12.0",
     "react-audio-player": "^0.11.1",
     "react-bootstrap": "^1.0.0-beta.16",
@@ -19,6 +21,8 @@
     "react-scripts": "3.3.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
