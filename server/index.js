@@ -23,6 +23,7 @@ var receiver = require('./routes/receiver');
 var merchant = require('./routes/merchant');
 var donation = require('./routes/donation');
 var transaction = require('./routes/transaction');
+var terminal = require('./routes/terminal');
 
 // Declare application parameters
 // Will have to change this if moving to a VM
@@ -34,6 +35,7 @@ app.use('/receiver', receiver);
 app.use('/merchant', merchant);
 app.use('/donation', donation);
 app.use('/transaction', transaction);
+app.use('/terminal', terminal);
 
 // Server
 var httpServer = http.createServer(app);
