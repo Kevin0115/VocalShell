@@ -1,3 +1,14 @@
+.body-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .vocalshell-wrapper {
   display: flex;
   justify-content: center;

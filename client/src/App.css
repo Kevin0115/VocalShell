@@ -41,9 +41,7 @@
   }
 }
 
-.body-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+.header-content {
+  font-family: "Courier New", Courier, monospace;
+  margin-top: 30px;
 }
