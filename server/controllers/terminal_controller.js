@@ -2,6 +2,14 @@ var cmd = require('node-cmd');
 const speech = require('@google-cloud/speech').v1p1beta1;
 const fs = require('fs');
 
+var cwd = null;
+cmd.get(
+  "pwd",
+  function (err, data, stderr) {
+    cwd = data;
+  }
+);
+
 exports.execute_command = async (req, res) => {
   try {
     // Creates a client
@@ -40,14 +48,11 @@ exports.execute_command = async (req, res) => {
       mkdir :  ["make", "directory"],
       rmdir : ["remove", "directory"],
       cd : ["change", "directory"],
-      echo : ["echo"],
-      cat : ["cat", "concatenate"],
     };
-    console.log(command);
 
     if (compareInputToCommand(command, dictionary.pwd, 3) || compareInputToCommand(command, dictionary.cwd, 3)) {
       cmd.get(
-        "pwd",
+        "cd " + cwd + "\npwd",
         function (err, data, stderr) {
           res.send({
             success: true,
@@ -58,7 +63,7 @@ exports.execute_command = async (req, res) => {
       );
     } else if (compareInputToCommand(command, dictionary.ls, 2)) {
       cmd.get(
-        "ls",
+        "cd " + cwd + "\nls",
         function (err, data, stderr) {
           res.send({
             success: true,
@@ -70,10 +75,10 @@ exports.execute_command = async (req, res) => {
     } else if (compareInputToCommand(command, dictionary.mkdir, 2)) {
       var dir_name = "";
       if (command.length > 2) {
-        var dir_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+        dir_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
       }
       cmd.get(
-        "mkdir" + dir_name,
+        "cd " + cwd + "\nmkdir" + dir_name,
         function (err, data, stderr) {
           res.send({
             success: true,
@@ -85,14 +90,27 @@ exports.execute_command = async (req, res) => {
     } else if (compareInputToCommand(command, dictionary.cd, 2)) {
       var dir_name = "";
       if (command.length > 2) {
-        var dir_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+        if (command.length === 3 && command[2] === "back") {
+          dir_name = " ..";
+        } else {
+          dir_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+        }
+      } else {
+        res.send({
+          success: true,
+          input: transcription,
+          output: "Please specify a directory"
+        });
       }
-      console.log("cd" + dir_name);
+      // console.log("cd" + dir_name);
       cmd.get(
-        "cd" + dir_name,
+        "cd " + cwd + "\ncd" + dir_name + "\npwd",
         function (err, data, stderr) {
           console.log(err);
-          console.log(stderr);
+          if (err == null) {
+            cwd = data;
+          }
+          console.log("New cwd: " + cwd);
           res.send({
             success: true,
             input: transcription,
