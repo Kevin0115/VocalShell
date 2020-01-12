@@ -41,7 +41,7 @@ exports.execute_command = async (req, res) => {
       .join('\n');
     console.log(`Transcription: ${transcription}`);
 
-    var command = transcription.trim().split(" ");
+    var command = transcription.trim().toLowerCase().split(" ");
     var dictionary = {
       clear : ["clear",],
       pwd : ["print", "working", "directory"],
