@@ -19,10 +19,6 @@ app.use(express.urlencoded({ extended : true }));
 app.use(bodyParser.urlencoded({extended: true}))
 
 // Import Routes
-var receiver = require('./routes/receiver');
-var merchant = require('./routes/merchant');
-var donation = require('./routes/donation');
-var transaction = require('./routes/transaction');
 var terminal = require('./routes/terminal');
 var command_log = require('./routes/command_log');
 
@@ -32,10 +28,6 @@ var HTTP_PORT = 8080;
 
 // Routes
 app.use('/', express.static(STATIC_ROOT));
-app.use('/receiver', receiver);
-app.use('/merchant', merchant);
-app.use('/donation', donation);
-app.use('/transaction', transaction);
 app.use('/terminal', terminal);
 app.use('/command_log', command_log);
 
