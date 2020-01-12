@@ -9,6 +9,7 @@ cmd.get(
     cwd = data;
   }
 );
+var lorem = "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"";
 
 exports.execute_command = async (req, res) => {
   try {
@@ -49,6 +50,8 @@ exports.execute_command = async (req, res) => {
       mkdir :  ["make", "directory"],
       rmdir : ["remove", "directory"],
       cd : ["change", "directory"],
+      touch : ["touch"],
+      cat : ["cat"],
     };
 
     if (compareInputToCommand(command, dictionary.pwd, 3) || compareInputToCommand(command, dictionary.cwd, 3)) {
@@ -125,6 +128,38 @@ exports.execute_command = async (req, res) => {
         input: transcription,
         output: "",
       });
+    } else if (compareInputToCommand(command, dictionary.touch, 1)) {
+      console.log("touch");
+      var file_name = "";
+      if (command.length > 2) {
+        file_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+      }
+      cmd.get(
+        "cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name,
+        function (err, data, stderr) {
+          res.send({
+            success: true,
+            input: transcription,
+            output: data
+          });
+        }
+      );
+    } else if (compareInputToCommand(command, dictionary.cat, 1)) {
+      console.log("cat");
+      var file_name = "";
+      if (command.length > 2) {
+        file_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+      }
+      cmd.get(
+        "cd " + cwd + "\ncat" + file_name,
+        function (err, data, stderr) {
+          res.send({
+            success: true,
+            input: transcription,
+            output: data
+          });
+        }
+      );
     } else {
       res.send({
         success: false,
