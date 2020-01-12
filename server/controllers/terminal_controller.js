@@ -186,7 +186,7 @@ exports.execute_command = async (req, res) => {
       res.send({
         success: false,
         input: transcription,
-        output: "Could not recognize command",
+        output: command.length > 0 ? "command not found: " + command[0] : "",
       });
     }
   } catch (e) {
