@@ -24,6 +24,7 @@ var merchant = require('./routes/merchant');
 var donation = require('./routes/donation');
 var transaction = require('./routes/transaction');
 var terminal = require('./routes/terminal');
+var command_log = require('./routes/command_log');
 
 // Declare application parameters
 // Will have to change this if moving to a VM
@@ -36,6 +37,7 @@ app.use('/merchant', merchant);
 app.use('/donation', donation);
 app.use('/transaction', transaction);
 app.use('/terminal', terminal);
+app.use('/command_log', command_log);
 
 // Server
 var httpServer = http.createServer(app);

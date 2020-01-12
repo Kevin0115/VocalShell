@@ -1,0 +1,11 @@
+.logs-content {
+  margin-top: 30px;
+}
+
+.logs-content .log{
+  margin-top: 10px;
+}
+
+.command{
+  font-weight: bold;
+}

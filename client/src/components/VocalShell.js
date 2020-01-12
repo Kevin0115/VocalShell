@@ -6,7 +6,7 @@ import '../css/VocalShell.css';
 
 import blobToBuffer from 'blob-to-buffer';
 
-const API_URL = 'http://05aca56f.ngrok.io';
+const API_URL = 'http://34.94.33.138:8080';
 
 class VocalShell extends Component {
   constructor(props) {
@@ -60,6 +60,10 @@ class VocalShell extends Component {
         .then(json => {
           console.log(json);
           if (json.success) {
+            if (json.input === 'clear') {
+              this.setState({commandList: [{cmd: 'clear'}]});
+              return;
+            }
             this.state.commandList.push({
               cmd: json.input
             })
@@ -71,10 +75,11 @@ class VocalShell extends Component {
               cmd: json.output
             })
           }
-          this.setState({loading: false});
         })
         .catch((err) => {
           console.log('Error Transcribing Audio');
+        })
+        .finally(() => {
           this.setState({loading: false});
         })
       }

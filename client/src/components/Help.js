@@ -40,6 +40,11 @@ class Help extends Component {
                       <td>mkdir</td>
                       <td>make directory</td>
                     </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>clear</td>
+                      <td>clear</td>
+                    </tr>
                   </tbody>
                 </Table>
         </div>
