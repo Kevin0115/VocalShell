@@ -132,7 +132,7 @@ exports.execute_command = async (req, res) => {
       console.log("touch");
       var file_name = "";
       if (command.length > 2) {
-        file_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+        file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
       }
       cmd.get(
         "cd " + cwd + "\ntouch" + file_name + "\necho " + lorem + ">> " + file_name,
@@ -148,8 +148,9 @@ exports.execute_command = async (req, res) => {
       console.log("cat");
       var file_name = "";
       if (command.length > 2) {
-        file_name = " \"" + command.slice(2, command.length).join(" ") + "\"";
+        file_name = " \"" + command.slice(1, command.length).join(" ") + "\"";
       }
+      console.log("cd " + cwd + "\ncat" + file_name);
       cmd.get(
         "cd " + cwd + "\ncat" + file_name,
         function (err, data, stderr) {
