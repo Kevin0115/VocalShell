@@ -13,7 +13,7 @@
     "@google-cloud/speech": "^3.5.4",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "moment": "^2.24.0",
     "node-cmd": "^3.0.0",
     "nodemon": "^1.18.7",
